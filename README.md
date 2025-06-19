@@ -1,15 +1,11 @@
 # Minecraft Bedrock Server
 
-[日本語版 README はこちら](https://github.com/TheRemote/MinecraftBedrockServer/blob/master/README_jp.md)
-
 Sets up a Minecraft Bedrock dedicated server on Ubuntu / Debian with options for automatic updates, backups and running automatically at startup.<br>
-View installation instructions at: https://jamesachambers.com/minecraft-bedrock-edition-ubuntu-dedicated-server-guide/<br>
-<br>
-If you are looking for a Docker containerized version of the Minecraft Bedrock Dedicated Server, it is available here:  <a href="https://github.com/TheRemote/Legendary-Bedrock-Container">https://github.com/TheRemote/Legendary-Bedrock-Container</a>
+<br> **Original by [TheRemote - MinecraftBedrockServer](https://github.com/TheRemote/MinecraftBedrockServer)** </br>
 
 <h2>Features</h2>
 <ul>
-  <li>Sets up the official Minecraft Bedrock Server (currently in alpha testing)</li>
+  <li>Sets up the official Minecraft Bedrock Server</li>
   <li>Fully operational Minecraft Bedrock edition server in a couple of minutes</li>
   <li>Ubuntu / Debian distributions supported</li>
   <li>Sets up Minecraft as a system service with option to autostart at boot</li>
@@ -24,13 +20,7 @@ If you are looking for a Docker containerized version of the Minecraft Bedrock D
 
 <h2>Quick Installation Instuctions</h2>
 To run the installation type:<br>
-<pre>curl https://raw.githubusercontent.com/TheRemote/MinecraftBedrockServer/master/SetupMinecraft.sh | bash</pre>
-
-<h2>Installation Guide</h2>
-<a href="https://jamesachambers.com/minecraft-bedrock-edition-ubuntu-dedicated-server-guide/">Minecraft Bedrock Dedicated Server Script Installation / Configuration Guide</a>
-
-<h2>Installing Resource Packs / RTX Support</h2>
-<p>For instructions on how to install resource packs (including optional RTX support), view my <a href="https://jamesachambers.com/minecraft-bedrock-server-resource-pack-guide/" target="_blank" rel="noopener">step-by-step Minecraft Bedrock Dedicated Server Resource Packs / Optional RTX guide here</a>.</p>
+<pre>curl https://raw.githubusercontent.com/OngakuKun/MinecraftBedrockServer/master/SetupMinecraft.sh | bash</pre>
 
 <h2>Tested Distributions</h2>
 <ul>
@@ -42,17 +32,7 @@ To run the installation type:<br>
   
 <h2>Tested Platforms</h2>
 <ul>
- <li>All PC X86_64 (WORKING)</li>
- <li><a href="https://jamesachambers.com/udoo-x86-microboard-breakdown/">Udoo X86 (WORKING)</a></li>
- <li><a href="https://jamesachambers.com/install-ubuntu-server-18-04-on-intel-compute-stick-guide/">Intel Compute Stick (WORKING)</a></li>
- <li>Other X86_64 platforms (WORKING)</li>
-  <ul><li>ARM 64bit (WORKING -- speed improved with Box64)</li>
-    <ul>
-      <li>Raspberry Pi 64 bit (WORKING -- Box64)</li>
-      <li>Raspberry Pi 32 bit (WORKING -- VERY SLOW -- 64 bit recommended!)</li>
-      <li>Tinkerboard (WORKING, 32 bit is slow, 64 bit uses Box64)</li>
-    </ul>
-  </ul>
+  Most x86_64 Platforms should work. I'll work on providing more detailed information soon
 </ul>
 
 <h2>Multiple Servers and Installation Paths</h2>
@@ -60,53 +40,17 @@ To run the installation type:<br>
 <p>The individual server folder is determined by the "server name" you enter for your server.  If it's an existing server, the scripts will be safely updated.  If it's a new server, then a new folder will be created under $ROOTPATH/minecraftbe/newservername.</p>
 <p>Keep the installation path the same for all servers and the script will manage all this for you.</p>
 
-<h2>Version Override</h2>
-You can revert to a previous version with the revert.sh script included in your directory like this: <pre>./revert.sh
-Set previous version in version_pin.txt: bedrock-server-1.19.10.20.zip</pre>
-If you have a specific version you would like to run, you can also create version_pin.txt yourself like this: <pre>echo "bedrock-server-1.18.33.02.zip" > version_pin.txt</pre>
-The version hold can be removed by deleting version_pin.txt.  This will allow it to update to the latest version again!
-
-<h2>Troubleshooting Note - Oracle Virtual Machines</h2>
-A very common problem people have with the Oracle Virtual Machine tutorials out there that typically show you how to use a free VM is that the VM is much more difficult to configure than just about any other product / offering out there.<br>
-The symptom you will have is that nobody will be able to connect.  This is not because of the second set of ports that it shows after startup (that is a nearly 3-4 years now old Bedrock bug and all servers do it).<br>
-It is because there are several steps you need to take to open the ports on the Oracle VM.  You need to both:<br>
+<h2>Changelogs</h2>
 <ul>
-  <li>Set the ingress ports (TCP/UDP) in the Virtual Cloud Network (VCN) security list</li>
-  <li>*and* set the ingress ports in a Network Security Group assigned to your instance</li>
-</ul><br>
-Both of these settings are typically required before you will be able to connect to your VM instance.  This is purely configuration related and has nothing to do with the script or the Minecraft server itself.<br><br>
-I do not recommend this platform due to the configuration difficulty but the people who have gone through the pain of configuring an Oracle VM have had good experiences with it after that point.  Just keep in mind it's going to be a rough ride through the configuration for most people.<br><br>
-Here are some additional links:<br>
-<ul>
-<li>https://jamesachambers.com/official-minecraft-bedrock-dedicated-server-on-raspberry-pi/comment-page-8/#comment-13946</li>
-<li>https://jamesachambers.com/minecraft-bedrock-edition-ubuntu-dedicated-server-guide/comment-page-53/#comment-13936</li>
-<li>https://jamesachambers.com/minecraft-bedrock-edition-ubuntu-dedicated-server-guide/comment-page-49/#comment-13377</li>
-<li>https://jamesachambers.com/legendary-minecraft-bedrock-container/comment-page-2/#comment-13706</li>
-</ul>
-
-<h2>Troubleshooting Note - Hyper-V</h2>
-There is a weird bug in Hyper-V that breaks UDP connections on the Minecraft server.  The fix for this is that you have to use a Generation 1 VM with the Legacy LAN network driver.<br>
-See the following links:<br>
-<ul>
-<li>https://jamesachambers.com/minecraft-bedrock-edition-ubuntu-dedicated-server-guide/comment-page-54/#comment-13863</li>
-<li>https://jamesachambers.com/minecraft-bedrock-edition-ubuntu-dedicated-server-guide/comment-page-56/#comment-14207</li>
-</ul>
-
-<h2>Buy A Coffee / Donate</h2>
-<p>People have expressed some interest in this (you are all saints, thank you, truly)</p>
-<ul>
- <li>PayPal: 05jchambers@gmail.com</li>
- <li>Venmo: @JamesAChambers</li>
- <li>CashApp: $theremote</li>
- <li>Bitcoin (BTC): 3H6wkPnL1Kvne7dJQS8h7wB4vndB9KxZP7</li>
-</ul>
-
-<h2>Update History</h2>
-<ul>
-  <li>December 5th 2025</li>
+  <li>June 19th 2025</li>
   <ul>
-    <li>Fixed download URL</li>
+    <li>Fork Original by <a href="https://github.com/TheRemote">TheRemote</a> (<a href="https://github.com/TheRemote/MinecraftBedrockServer">MinecraftBedrockServer</a>)</li> 
+    <li>Fix download URL</li>
+    <li>Cleanup README.md</li>
   </ul>
+</ul>
+<h2>Update History until December 2024</h2>
+<ul>
   <li>December 1st 2024</li>
   <ul>
     <li>Fixed download URL</li>
