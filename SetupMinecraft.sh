@@ -9,9 +9,7 @@
 #
 # GitHub Repository: https://github.com/OngakuKun/MinecraftBedrockServer
 
-# Initial Sleep to not interrupt Download
-sleep 1
-
+echo "Minecraft Bedrock Server installation script by James A. Chambers"
 echo "Latest version always at https://github.com/OngakuKun/MinecraftBedrockServer"
 echo "Don't forget to set up port forwarding on your router!  The default port is 19132"
 
