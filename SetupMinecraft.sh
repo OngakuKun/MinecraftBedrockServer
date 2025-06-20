@@ -9,12 +9,6 @@
 #
 # GitHub Repository: https://github.com/OngakuKun/MinecraftBedrockServer
 
-# Initial Sleep to not interrupt Download
-sleep 1
-
-echo "Latest version always at https://github.com/OngakuKun/MinecraftBedrockServer"
-echo "Don't forget to set up port forwarding on your router!  The default port is 19132"
-
 # Randomizer for user agent
 RandNum=$(echo $((1 + $RANDOM % 5000)))
 
