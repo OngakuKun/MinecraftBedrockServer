@@ -20,7 +20,7 @@ Sets up a Minecraft Bedrock dedicated server on Ubuntu / Debian with options for
 
 <h2>Quick Installation Instuctions</h2>
 To run the installation type:<br>
-<pre>curl https://raw.githubusercontent.com/OngakuKun/MinecraftBedrockServer/master/SetupMinecraft.sh | bash</pre>
+<pre>curl --silent https://raw.githubusercontent.com/OngakuKun/MinecraftBedrockServer/master/SetupMinecraft.sh | bash</pre>
 
 <h2>Tested Distributions</h2>
 <ul>
@@ -42,6 +42,12 @@ To run the installation type:<br>
 
 <h2>Changelogs</h2>
 <ul>
+  <li>June 21th 2025</li>
+  <ul>
+    <li>Edit Quick Installation Instructions</li>
+    <li>Cleanup SetupMinecraft.sh</li>
+    <li>Cleanup README.md</li>
+  </ul>
   <li>June 19th 2025</li>
   <ul>
     <li>Fork Original by <a href="https://github.com/TheRemote">TheRemote</a> (<a href="https://github.com/TheRemote/MinecraftBedrockServer">MinecraftBedrockServer</a>)</li> 

@@ -5,13 +5,21 @@
 # Resource Pack Guide: https://jamesachambers.com/minecraft-bedrock-server-resource-pack-guide/
 #
 # To run the setup script use:
-# curl https://raw.githubusercontent.com/OngakuKun/MinecraftBedrockServer/master/SetupMinecraft.sh | bash
+# curl --silent https://raw.githubusercontent.com/OngakuKun/MinecraftBedrockServer/master/SetupMinecraft.sh | bash
 #
 # GitHub Repository: https://github.com/OngakuKun/MinecraftBedrockServer
 
-echo "Minecraft Bedrock Server installation script by James A. Chambers"
-echo "Latest version always at https://github.com/OngakuKun/MinecraftBedrockServer"
-echo "Don't forget to set up port forwarding on your router!  The default port is 19132"
+cat << EOF
+################################################################################
+#                                                                              #
+#              Minecraft Bedrock Dedicated Server - Quick Install              #
+#                                                                              #
+#                                by OngakuKun                                  #
+#                                                                              #
+################################################################################
+  Latest version always at https://github.com/OngakuKun/MinecraftBedrockServer
+
+EOF
 
 # Randomizer for user agent
 RandNum=$(echo $((1 + $RANDOM % 5000)))
@@ -56,7 +64,7 @@ Update_Scripts() {
 
   # Download start.sh from repository
   echo "Grabbing start.sh from repository..."
-  curl -H "Accept-Encoding: identity" -L -o start.sh https://raw.githubusercontent.com/OngakuKun/MinecraftBedrockServer/master/start.sh
+  curl --silent -H "Accept-Encoding: identity" -L -o start.sh https://raw.githubusercontent.com/OngakuKun/MinecraftBedrockServer/master/start.sh
   chmod +x start.sh
   sed -i "s:dirname:$DirName:g" start.sh
   sed -i "s:servername:$ServerName:g" start.sh
@@ -65,7 +73,7 @@ Update_Scripts() {
 
   # Download stop.sh from repository
   echo "Grabbing stop.sh from repository..."
-  curl -H "Accept-Encoding: identity" -L -o stop.sh https://raw.githubusercontent.com/OngakuKun/MinecraftBedrockServer/master/stop.sh
+  curl --silent -H "Accept-Encoding: identity" -L -o stop.sh https://raw.githubusercontent.com/OngakuKun/MinecraftBedrockServer/master/stop.sh
   chmod +x stop.sh
   sed -i "s:dirname:$DirName:g" stop.sh
   sed -i "s:servername:$ServerName:g" stop.sh
@@ -74,7 +82,7 @@ Update_Scripts() {
 
   # Download restart.sh from repository
   echo "Grabbing restart.sh from repository..."
-  curl -H "Accept-Encoding: identity" -L -o restart.sh https://raw.githubusercontent.com/OngakuKun/MinecraftBedrockServer/master/restart.sh
+  curl --silent -H "Accept-Encoding: identity" -L -o restart.sh https://raw.githubusercontent.com/OngakuKun/MinecraftBedrockServer/master/restart.sh
   chmod +x restart.sh
   sed -i "s:dirname:$DirName:g" restart.sh
   sed -i "s:servername:$ServerName:g" restart.sh
@@ -83,7 +91,7 @@ Update_Scripts() {
 
   # Download fixpermissions.sh from repository
   echo "Grabbing fixpermissions.sh from repository..."
-  curl -H "Accept-Encoding: identity" -L -o fixpermissions.sh https://raw.githubusercontent.com/OngakuKun/MinecraftBedrockServer/master/fixpermissions.sh
+  curl --silent -H "Accept-Encoding: identity" -L -o fixpermissions.sh https://raw.githubusercontent.com/OngakuKun/MinecraftBedrockServer/master/fixpermissions.sh
   chmod +x fixpermissions.sh
   sed -i "s:dirname:$DirName:g" fixpermissions.sh
   sed -i "s:servername:$ServerName:g" fixpermissions.sh
@@ -92,7 +100,7 @@ Update_Scripts() {
 
   # Download revert.sh from repository
   echo "Grabbing revert.sh from repository..."
-  curl -H "Accept-Encoding: identity" -L -o revert.sh https://raw.githubusercontent.com/OngakuKun/MinecraftBedrockServer/master/revert.sh
+  curl --silent -H "Accept-Encoding: identity" -L -o revert.sh https://raw.githubusercontent.com/OngakuKun/MinecraftBedrockServer/master/revert.sh
   chmod +x revert.sh
   sed -i "s:dirname:$DirName:g" revert.sh
   sed -i "s:servername:$ServerName:g" revert.sh
@@ -101,7 +109,7 @@ Update_Scripts() {
 
   # Download clean.sh from repository
   echo "Grabbing clean.sh from repository..."
-  curl -H "Accept-Encoding: identity" -L -o clean.sh https://raw.githubusercontent.com/OngakuKun/MinecraftBedrockServer/master/clean.sh
+  curl --silent -H "Accept-Encoding: identity" -L -o clean.sh https://raw.githubusercontent.com/OngakuKun/MinecraftBedrockServer/master/clean.sh
   chmod +x clean.sh
   sed -i "s:dirname:$DirName:g" clean.sh
   sed -i "s:servername:$ServerName:g" clean.sh
@@ -110,7 +118,7 @@ Update_Scripts() {
 
   # Download update.sh from repository
   echo "Grabbing update.sh from repository..."
-  curl -H "Accept-Encoding: identity" -L -o update.sh https://raw.githubusercontent.com/OngakuKun/MinecraftBedrockServer/master/update.sh
+  curl --silent -H "Accept-Encoding: identity" -L -o update.sh https://raw.githubusercontent.com/OngakuKun/MinecraftBedrockServer/master/update.sh
   chmod +x update.sh
   sed -i "s<pathvariable<$PATH<g" update.sh
 }
@@ -118,7 +126,7 @@ Update_Scripts() {
 Update_Service() {
   # Update minecraft server service
   echo "Configuring Minecraft $ServerName service..."
-  sudo curl -H "Accept-Encoding: identity" -L -o /etc/systemd/system/$ServerName.service https://raw.githubusercontent.com/OngakuKun/MinecraftBedrockServer/master/minecraftbe.service
+  sudo curl --silent -H "Accept-Encoding: identity" -L -o /etc/systemd/system/$ServerName.service https://raw.githubusercontent.com/OngakuKun/MinecraftBedrockServer/master/minecraftbe.service
   sudo chmod +x /etc/systemd/system/$ServerName.service
   sudo sed -i "s:userxname:$UserName:g" /etc/systemd/system/$ServerName.service
   sudo sed -i "s:dirname:$DirName:g" /etc/systemd/system/$ServerName.service
@@ -135,10 +143,10 @@ Update_Service() {
   if [[ "$answer" != "${answer#[Yy]}" ]]; then
     sudo systemctl enable $ServerName.service
     # Automatic reboot at 4am configuration
-    TimeZone=$(cat /etc/timezone)
-    CurrentTime=$(date)
+    TimeZone=$(date +'%Z (%z)')
+    CurrentTime=$(date '+%Y-%m-%d %H:%M')
     echo "Your time zone is currently set to $TimeZone.  Current system time: $CurrentTime"
-    echo "You can adjust/remove the selected reboot time later by typing crontab -e or running SetupMinecraft.sh again."
+    echo "You can adjust/remove the selected reboot time later by typing crontab -e."
     echo -n "Automatically restart and backup server at 4am daily (y/n)?"
     read answer </dev/tty
     if [[ "$answer" != "${answer#[Yy]}" ]]; then
@@ -215,7 +223,9 @@ Check_Dependencies() {
     if ! command -v curl &>/dev/null; then sudo DEBIAN_FRONTEND=noninteractive apt-get install curl -yqq; fi
     echo "Dependency installation completed"
   else
-    echo "Warning: apt was not found.  You may need to install curl, screen, unzip, libcurl4, openssl, libc6 and libcrypt1 with your package manager for the server to start properly!"
+    echo "[WARN] apt was not found."
+    echo "   You may need to install these yourself"
+    echo "   curl, screen, unzip, libcurl4, openssl, libc6 libcrypt1"
   fi
 }
 
@@ -338,7 +348,9 @@ Update_Sudoers() {
 
 # Check to make sure we aren't running as root
 if [[ $(id -u) = 0 ]]; then
-  echo "This script is not meant to be run as root. Please run ./SetupMinecraft.sh as a non-root user, without sudo; the script will call sudo when it is needed. Exiting..."
+  echo "[WARN] This script is not meant to be run as root."
+  echo "   Please run ./SetupMinecraft.sh as a non-root user, without sudo"
+  echo "   The script will call sudo when it is needed. Exiting..."
   exit 1
 fi
 
@@ -370,34 +382,37 @@ else
 fi
 
 # Server name configuration
-echo "Enter a short one word label for a new or existing server (don't use minecraftbe)..."
+echo "Enter a short one word label for a new or existing server"
 echo "It will be used in the folder name and service name..."
 
-read_with_prompt ServerName "Server Label"
+read_with_prompt ServerName "   Server Label"
 
 # Remove non-alphanumeric characters from ServerName
 ServerName=$(echo "$ServerName" | tr -cd '[a-zA-Z0-9]._-')
 
 if [[ "$ServerName" == *"minecraftbe"* ]]; then
-  echo "Server label of minecraftbe is not allowed.  Please choose a different server label!"
+  echo "Server label of minecraftbe is not allowed."
+  echo "   Exit Script. Choose a different server label!"
   exit 1
 fi
 
 echo "Enter server IPV4 port (default 19132): "
-read_with_prompt PortIPV4 "Server IPV4 Port" 19132
+read_with_prompt PortIPV4 "   Server IPV4 Port" 19132
 
 echo "Enter server IPV6 port (default 19133): "
-read_with_prompt PortIPV6 "Server IPV6 Port" 19133
+read_with_prompt PortIPV6 "   Server IPV6 Port" 19133
 
 if [ -d "$ServerName" ]; then
-  echo "Directory minecraftbe/$ServerName already exists!  Updating scripts and configuring service ..."
+  echo "Directory $DirName/$ServerName already exists!"
+  echo "Updating scripts and configuring service..."
 
   # Get username
   UserName=$(whoami)
   cd $DirName
   cd minecraftbe
   cd $ServerName
-  echo "Server directory is: $DirName/minecraftbe/$ServerName"
+  echo "Server directory is:"
+  echo "$DirName/minecraftbe/$ServerName"
 
   # Update Minecraft server scripts
   Update_Scripts
@@ -412,7 +427,9 @@ if [ -d "$ServerName" ]; then
   Fix_Permissions
 
   # Setup completed
-  echo "Setup is complete.  Starting Minecraft $ServerName server.  To view the console use the command screen -r or check the logs folder if the server fails to start"
+  echo "Setup is complete. Starting Minecraft $ServerName server."
+  echo "To view the console use the command screen -r"
+  echo "Check the logs folder if the server fails to start"
   sudo systemctl daemon-reload
   sudo systemctl start "$ServerName.service"
 
@@ -420,7 +437,8 @@ if [ -d "$ServerName" ]; then
 fi
 
 # Create server directory
-echo "Creating minecraft server directory ($DirName/minecraftbe/$ServerName)..."
+echo "Creating minecraft server directory:"
+echo "($DirName/minecraftbe/$ServerName)..."
 cd $DirName
 cd minecraftbe
 mkdir $ServerName
@@ -447,7 +465,9 @@ Update_Sudoers
 Fix_Permissions
 
 # Finished!
-echo "Setup is complete.  Starting Minecraft server. To view the console use the command screen -r or check the logs folder if the server fails to start."
+  echo "Setup is complete. Starting Minecraft $ServerName server."
+  echo "To view the console use the command screen -r"
+  echo "Check the logs folder if the server fails to start"
 sudo systemctl daemon-reload
 sudo systemctl start "$ServerName.service"
 
@@ -465,5 +485,6 @@ done
 if ! screen -list | grep -q "\.$ServerName\s"; then
   echo "Minecraft server failed to start after 20 seconds."
 else
-  echo "Minecraft server has started.  Type screen -r $ServerName to view the running server!"
+  echo "Minecraft server has started."
+  echo "Type screen -r $ServerName to view the running server!"
 fi
