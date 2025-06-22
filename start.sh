@@ -13,8 +13,10 @@ fi
 
 # Check to make sure we aren't running as root
 if [[ $(id -u) = 0 ]]; then
-    echo "This script is not meant to be run as root. Please run ./start.sh as a non-root user, without sudo;  Exiting..."
-    exit 1
+  echo "[WARN] This script is not meant to be run as root."
+  echo "   Please run ./SetupMinecraft.sh as a non-root user, without sudo"
+  echo "   The script will call sudo when it is needed. Exiting..."
+  exit 1
 fi
 
 # Randomizer for user agent
@@ -43,18 +45,18 @@ fi
 
 # Check if network interfaces are up
 NetworkChecks=0
-if [ -e '/sbin/route' ]; then
-    DefaultRoute=$(/sbin/route -n | awk '$4 == "UG" {print $2}')
+if [ -e '/sbin/ip' ]; then
+    DefaultRoute=$(ip route show | grep -i 'default')
 else
-    DefaultRoute=$(route -n | awk '$4 == "UG" {print $2}')
+    DefaultRoute=$(ip route show | grep -i 'default')
 fi
 while [ -z "$DefaultRoute" ]; do
     echo "Network interface not up, will try again in 1 second"
     sleep 1
-    if [ -e '/sbin/route' ]; then
-        DefaultRoute=$(/sbin/route -n | awk '$4 == "UG" {print $2}')
+    if [ -e '/sbin/ip' ]; then
+        DefaultRoute=$(ip route show | grep -i 'default')
     else
-        DefaultRoute=$(route -n | awk '$4 == "UG" {print $2}')
+        DefaultRoute=$(ip route show | grep -i 'default')
     fi
     NetworkChecks=$((NetworkChecks + 1))
     if [ $NetworkChecks -gt 20 ]; then
