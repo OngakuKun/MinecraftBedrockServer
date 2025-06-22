@@ -156,7 +156,7 @@ Update_Service() {
         crontab -l | grep -v -F "$croncmd"
         echo "$cronjob"
       ) | crontab -
-      echo "Daily restart scheduled. To edit automatic restart type crontab -e"
+      echo "Daily restart scheduled.  To change time or remove automatic restart type crontab -e"
     fi
   fi
 }
@@ -226,14 +226,14 @@ Check_Dependencies() {
 
   elif command -v pacman &>/dev/null; then
     echo "Checking and installing dependencies.."
-    if ! command -v curl &>/dev/null; then sudo pacman -S --noconfirm curl > /dev/null | echo "Installed curl"; fi
-    if ! command -v unzip &>/dev/null; then sudo pacman -S --noconfirm unzip > /dev/null | echo "Installed unzip"; fi
-    if ! command -v screen &>/dev/null; then sudo pacman -S --noconfirm screen > /dev/null | echo "Installed screen"; fi
-    if ! command -v gawk &>/dev/null; then sudo pacman -S --noconfirm gawk > /dev/null | echo "Installed gawk"; fi
-    if ! command -v openssl &>/dev/null; then sudo pacman -S --noconfirm openssl > /dev/null | echo "Installed openssl"; fi
-    if ! command -v xargs &>/dev/null; then sudo pacman -S --noconfirm findutils > /dev/null | echo "Installed findutils(xargs)"; fi
-    if ! command -v pigz &>/dev/null; then sudo pacman -S --noconfirm pigz > /dev/null | echo "Installed pigz"; fi
-    if ! command -v crontab &>/dev/null; then sudo pacman -S --noconfirm cron > /dev/null | echo "Installed cronie(cron)"; fi
+    if ! command -v curl &>/dev/null; then sudo pacman -S --noconfirm curl; fi
+    if ! command -v unzip &>/dev/null; then sudo pacman -S --noconfirm unzip; fi
+    if ! command -v screen &>/dev/null; then sudo pacman -S --noconfirm screen; fi
+    if ! command -v gawk &>/dev/null; then sudo pacman -S --noconfirm gawk; fi
+    if ! command -v openssl &>/dev/null; then sudo pacman -S --noconfirm openssl; fi
+    if ! command -v xargs &>/dev/null; then sudo pacman -S --noconfirm findutils; fi
+    if ! command -v pigz &>/dev/null; then sudo pacman -S --noconfirm pigz; fi
+    if ! command -v crontab &>/dev/null; then sudo pacman -S --noconfirm cron; fi
     echo "Dependency installation completed"
 
   else
@@ -249,7 +249,8 @@ Update_Server() {
   curl -H "Accept-Encoding: identity" -H "Accept-Language: en" -L -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.$RandNum.212 Safari/537.36" -o downloads/version.html https://net-secondary.web.minecraft-services.net/api/v1.0/download/links
   DownloadURL=$(grep -o 'https://www.minecraft.net/bedrockdedicatedserver/bin-linux/[^"]*' downloads/version.html)
   DownloadFile=$(echo "$DownloadURL" | sed 's#.*/##')
-  echo "Latest Version: $DownloadFile"
+  echo "$DownloadURL"
+  echo "$DownloadFile"
 
   # Download latest version of Minecraft Bedrock dedicated server
   echo "Downloading the latest version of Minecraft Bedrock server..."
@@ -367,12 +368,12 @@ if [[ $(id -u) = 0 ]]; then
   exit 1
 fi
 
-if [ -e "SetupMinecraft.sh" ]; then
-  rm -f "SetupMinecraft.sh"
-  echo "Local copy of SetupMinecraft.sh running.  Exiting and running online version..."
-  curl --silent https://raw.githubusercontent.com/OngakuKun/MinecraftBedrockServer/master/SetupMinecraft.sh | bash
-  exit 1
-fi
+#if [ -e "SetupMinecraft.sh" ]; then
+#  rm -f "SetupMinecraft.sh"
+#  echo "Local copy of SetupMinecraft.sh running.  Exiting and running online version..."
+#  curl --silent https://raw.githubusercontent.com/OngakuKun/MinecraftBedrockServer/master/SetupMinecraft.sh | bash
+#  exit 1
+#fi
 
 Check_Dependencies
 

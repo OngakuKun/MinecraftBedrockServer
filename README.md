@@ -42,6 +42,15 @@ To run the installation type:<br>
 
 <h2>Changelogs</h2>
 <ul>
+  <li>June 22th 2025</li>
+  <ul>
+    <li>Add --quiet option to unzip cmd unpacking the main file</li>
+    <li>Add pacman dependencies install for archlinux distros</li>
+    <li>Remove --silent option from curl cmd</li>
+    <li>Remove route from dependencies list</li>
+    <li>Fix some promtline spacing</li>
+    <li>Cleanup SetupMinecraft.sh</li>
+  </ul>
   <li>June 21th 2025</li>
   <ul>
     <li>Edit Quick Installation Instructions</li>
