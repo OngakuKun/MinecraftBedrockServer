@@ -49,6 +49,7 @@ To run the installation type:<br>
     <li>Remove --silent option from curl cmd</li>
     <li>Remove route from dependencies list</li>
     <li>Fix some promtline spacing</li>
+    <li>Cleanup Dependency Installation</li>
     <li>Cleanup SetupMinecraft.sh</li>
   </ul>
   <li>June 21th 2025</li>

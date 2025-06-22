@@ -171,17 +171,41 @@ Check_Dependencies() {
   echo "Starting Automatic Dependency installation"
   if command -v apt-get &>/dev/null; then
     echo "Updating apt.."
-    sudo DEBIAN_FRONTEND=noninteractive apt-get update && sudo DEBIAN_FRONTEND=noninteractive apt-get upgrade -yqq
+    sudo DEBIAN_FRONTEND=noninteractive apt-get update > /dev/null && sudo DEBIAN_FRONTEND=noninteractive apt-get upgrade -yqq /dev/null
 
     echo "Checking and installing dependencies.."
-    if ! command -v curl &>/dev/null; then sudo DEBIAN_FRONTEND=noninteractive apt-get install curl -yqq | echo "Installed curl"; fi
-    if ! command -v unzip &>/dev/null; then sudo DEBIAN_FRONTEND=noninteractive apt-get install unzip -yqq | echo "Installed unzip"; fi
-    if ! command -v screen &>/dev/null; then sudo DEBIAN_FRONTEND=noninteractive apt-get install screen -yqq | echo "Installed screen"; fi
-    if ! command -v gawk &>/dev/null; then sudo DEBIAN_FRONTEND=noninteractive apt-get install gawk -yqq | echo "Installed gawk"; fi
-    if ! command -v openssl &>/dev/null; then sudo DEBIAN_FRONTEND=noninteractive apt-get install openssl -yqq | echo "Installed openssl"; fi
-    if ! command -v xargs &>/dev/null; then sudo DEBIAN_FRONTEND=noninteractive apt-get install xargs -yqq | echo "Installed xargs"; fi
-    if ! command -v pigz &>/dev/null; then sudo DEBIAN_FRONTEND=noninteractive apt-get install pigz -yqq | echo "Installed pigz"; fi
-    if ! command -v cron  &>/dev/null; then sudo DEBIAN_FRONTEND=noninteractive apt-get install cron -yqq | echo "Installed cron"; fi
+    if ! command -v curl &>/dev/null; then
+      sudo DEBIAN_FRONTEND=noninteractive apt-get install curl -yqq > /dev/null
+      if command -v curl &>/dev/null; then echo "Installed curl"; fi
+    fi
+    if ! command -v unzip &>/dev/null; then
+      sudo DEBIAN_FRONTEND=noninteractive apt-get install unzip -yqq > /dev/null
+      if command -v unzip &>/dev/null; then echo "Installed unzip"; fi
+    fi
+    if ! command -v screen &>/dev/null; then
+      sudo DEBIAN_FRONTEND=noninteractive apt-get install screen -yqq > /dev/null
+      if command -v screen &>/dev/null; then echo "Installed screen"; fi
+    fi
+    if ! command -v gawk &>/dev/null; then
+      sudo DEBIAN_FRONTEND=noninteractive apt-get install gawk -yqq > /dev/null
+      if command -v gawk &>/dev/null; then echo "Installed gawk"; fi
+    fi
+    if ! command -v openssl &>/dev/null; then
+      sudo DEBIAN_FRONTEND=noninteractive apt-get install openssl -yqq > /dev/null
+      if command -v openssl &>/dev/null; then echo "Installed openssl"; fi
+    fi
+    if ! command -v xargs &>/dev/null; then
+      sudo DEBIAN_FRONTEND=noninteractive apt-get install xargs -yqq > /dev/null
+      if command -v xargs &>/dev/null; then echo "Installed xargs"; fi
+    fi
+    if ! command -v pigz &>/dev/null; then
+      sudo DEBIAN_FRONTEND=noninteractive apt-get install pigz -yqq > /dev/null
+      if command -v pigz &>/dev/null; then echo "Installed pigz"; fi
+    fi
+    if ! command -v cron  &>/dev/null; then
+      sudo DEBIAN_FRONTEND=noninteractive apt-get install cron -yqq > /dev/null
+      if command -v cron  &>/dev/null; then echo "Installed cron"; fi
+    fi
 
     CurlVer=$(apt-cache show libcurl4 | grep Version | awk 'NR==1{ print $2 }')
     if [[ "$CurlVer" ]]; then
@@ -226,14 +250,38 @@ Check_Dependencies() {
 
   elif command -v pacman &>/dev/null; then
     echo "Checking and installing dependencies.."
-    if ! command -v curl &>/dev/null; then sudo pacman -S --noconfirm curl > /dev/null | echo "Installed curl"; fi
-    if ! command -v unzip &>/dev/null; then sudo pacman -S --noconfirm unzip > /dev/null | echo "Installed unzip"; fi
-    if ! command -v screen &>/dev/null; then sudo pacman -S --noconfirm screen > /dev/null | echo "Installed screen"; fi
-    if ! command -v gawk &>/dev/null; then sudo pacman -S --noconfirm gawk > /dev/null | echo "Installed gawk"; fi
-    if ! command -v openssl &>/dev/null; then sudo pacman -S --noconfirm openssl > /dev/null | echo "Installed openssl"; fi
-    if ! command -v xargs &>/dev/null; then sudo pacman -S --noconfirm findutils > /dev/null | echo "Installed findutils(xargs)"; fi
-    if ! command -v pigz &>/dev/null; then sudo pacman -S --noconfirm pigz > /dev/null | echo "Installed pigz"; fi
-    if ! command -v crontab &>/dev/null; then sudo pacman -S --noconfirm cron > /dev/null | echo "Installed cronie(cron)"; fi
+    if ! command -v curl &>/dev/null; then
+      sudo pacman -S --noconfirm curl > /dev/null;
+      if command -v curl &>/dev/null; then echo "Installed curl"; fi
+    fi
+    if ! command -v unzip &>/dev/null; then
+      sudo pacman -S --noconfirm unzip > /dev/null;
+      if command -v unzip &>/dev/null; then echo "Installed unzip"; fi
+    fi
+    if ! command -v screen &>/dev/null; then
+      sudo pacman -S --noconfirm screen > /dev/null;
+      if command -v screen &>/dev/null; then echo "Installed screen"; fi
+    fi
+    if ! command -v gawk &>/dev/null; then
+      sudo pacman -S --noconfirm gawk > /dev/null;
+      if command -v gawk &>/dev/null; then echo "Installed gawk"; fi
+    fi
+    if ! command -v openssl &>/dev/null; then
+      sudo pacman -S --noconfirm openssl > /dev/null;
+      if command -v openssl &>/dev/null; then echo "Installed openssl"; fi
+    fi
+    if ! command -v xargs &>/dev/null; then
+      sudo pacman -S --noconfirm findutils > /dev/null;
+      if command -v xargs &>/dev/null; then echo "Installed findutils(xargs)"; fi
+    fi
+    if ! command -v pigz &>/dev/null; then
+      sudo pacman -S --noconfirm pigz > /dev/null;
+      if command -v pigz &>/dev/null; then echo "Installed pigz"; fi
+    fi
+    if ! command -v crontab &>/dev/null; then
+      sudo pacman -S --noconfirm cron > /dev/null;
+      if command -v crontab &>/dev/null; then echo "Installed cronie(cron)"; fi
+    fi
     echo "Dependency installation completed"
 
   else
