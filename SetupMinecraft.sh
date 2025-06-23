@@ -150,6 +150,14 @@ Update_Service() {
     echo -n "   Automatically restart and backup server at 4am daily (y/n)?"
     read answer </dev/tty
     if [[ "$answer" != "${answer#[Yy]}" ]]; then
+      if ! command -v cron  &>/dev/null && command -v apt-get &>/dev/null; then
+        sudo DEBIAN_FRONTEND=noninteractive apt-get install cron -yqq > /dev/null
+        if command -v cron  &>/dev/null; then echo "Installed cron"; fi
+      fi
+      if ! command -v crontab &>/dev/null && command -v pacman &>/dev/null; then
+        sudo pacman -S --noconfirm cron > /dev/null;
+        if command -v crontab &>/dev/null; then echo "Installed cronie(cron)"; fi
+      fi
       croncmd="$DirName/minecraftbe/$ServerName/restart.sh 2>&1"
       cronjob="0 4 * * * $croncmd"
       (
@@ -201,10 +209,6 @@ Check_Dependencies() {
     if ! command -v pigz &>/dev/null; then
       sudo DEBIAN_FRONTEND=noninteractive apt-get install pigz -yqq > /dev/null
       if command -v pigz &>/dev/null; then echo "Installed pigz"; fi
-    fi
-    if ! command -v cron  &>/dev/null; then
-      sudo DEBIAN_FRONTEND=noninteractive apt-get install cron -yqq > /dev/null
-      if command -v cron  &>/dev/null; then echo "Installed cron"; fi
     fi
 
     CurlVer=$(apt-cache show libcurl4 | grep Version | awk 'NR==1{ print $2 }')
@@ -277,10 +281,6 @@ Check_Dependencies() {
     if ! command -v pigz &>/dev/null; then
       sudo pacman -S --noconfirm pigz > /dev/null;
       if command -v pigz &>/dev/null; then echo "Installed pigz"; fi
-    fi
-    if ! command -v crontab &>/dev/null; then
-      sudo pacman -S --noconfirm cron > /dev/null;
-      if command -v crontab &>/dev/null; then echo "Installed cronie(cron)"; fi
     fi
     echo "Dependency installation completed"
 
@@ -415,10 +415,10 @@ if [[ $(id -u) = 0 ]]; then
   exit 1
 fi
 
-if [ -e "SetupMinecraft.sh" ]; then
-  rm -f "SetupMinecraft.sh"
-  echo "Local copy of SetupMinecraft.sh running.  Exiting and running online version..."
-  curl --silent https://raw.githubusercontent.com/OngakuKun/MinecraftBedrockServer/master/SetupMinecraft.sh | bash
+if [ -e "setupminecraft.sh" ]; then
+  rm -f "setupminecraft.sh"
+  echo "local copy of setupminecraft.sh running.  exiting and running online version..."
+  curl --silent https://raw.githubusercontent.com/ongakukun/minecraftbedrockserver/master/setupminecraft.sh | bash
   exit 1
 fi
 
