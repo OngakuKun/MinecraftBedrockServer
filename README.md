@@ -1,4 +1,4 @@
-# Minecraft Bedrock Server
+# Minecraft Bedrock Dedicated Server
 
 Sets up a Minecraft Bedrock dedicated server on Ubuntu / Debian with options for automatic updates, backups and running automatically at startup.<br>
 <br> **Original by [TheRemote - MinecraftBedrockServer](https://github.com/TheRemote/MinecraftBedrockServer)** </br>
