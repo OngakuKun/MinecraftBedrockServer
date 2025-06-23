@@ -1,18 +1,18 @@
-# Minecraft Bedrock Server
+# Minecraft Bedrock Dedicated Server
 
-Sets up a Minecraft Bedrock dedicated server on Ubuntu / Debian with options for automatic updates, backups and running automatically at startup.<br>
+Sets up a Minecraft Bedrock Dedicated Server on Debian and archlinux based Distros with options for automatic updates, backups and running automatically at startup.<br>
 <br> **Original by [TheRemote - MinecraftBedrockServer](https://github.com/TheRemote/MinecraftBedrockServer)** </br>
 
 <h2>Features</h2>
 <ul>
-  <li>Sets up the official Minecraft Bedrock Server</li>
-  <li>Fully operational Minecraft Bedrock edition server in a couple of minutes</li>
-  <li>Ubuntu / Debian distributions supported</li>
-  <li>Sets up Minecraft as a system service with option to autostart at boot</li>
-  <li>Automatic backups when server restarts</li>
+  <li>Official Minecraft Bedrock Server</li>
+  <li>Fully operational in a couple of minutes</li>
+  <li>Debian and archlinux based distributions supported</li>
+  <li>Setup as a system service with option to autostart at boot</li>
+  <li>Automatic backups on server restart</li>
   <li>Supports multiple instances -- you can run multiple Bedrock servers on the same system</li>
   <li>Updates automatically to the latest or user-defined version when server is started</li>
-  <li>Easy control of server with start.sh, stop.sh and restart.sh scripts</li>
+  <li>Easy server-control with start.sh, stop.sh and restart.sh scripts</li>
   <li>Adds logging with timestamps to "logs" directory</li>
   <li>Optional scheduled daily restart of server using cron</li>
   <li>*NEW* Box64 support for 64 bit ARM (aarch64) which greatly improves emulation speed over QEMU by translating some system calls to native system calls</li>
