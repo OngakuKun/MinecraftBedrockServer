@@ -8,7 +8,9 @@ PathLength=${#USERPATH}
 if [[ "$PathLength" -gt 12 ]]; then
     PATH="$USERPATH"
 else
-    echo "Unable to set path variable.  You likely need to download an updated version of SetupMinecraft.sh from GitHub!"
+    echo "Unable to set path variable."
+    echo "Download a updated SetupMinecraft.sh from the GitHub!"
+    echo "https://github.com/OngakuKun/MinecraftBedrockServer/"
 fi
 
 # Check to make sure we aren't running as root
@@ -175,8 +177,8 @@ if [ -z "$ContentLogging" ]; then
     echo "# Enables logging content errors to a file" >> dirname/minecraftbe/servername/server.properties
 fi
 
-echo "Starting Minecraft server.  To view window type screen -r servername"
-echo "To minimize the window and let the server run in the background, press Ctrl+A then Ctrl+D"
+echo "Starting Minecraft Server. To view window type screen -r servername"
+echo "To minimize and let it run in the background, press Ctrl+A then Ctrl+D"
 
 CPUArch=$(uname -m)
 if [[ "$CPUArch" == *"aarch64"* ]]; then
@@ -193,6 +195,7 @@ fi
 if command -v gawk &>/dev/null; then
     BASH_CMD+=$' | gawk \'{ print strftime(\"[%Y-%m-%d %H:%M:%S]\"), $0 }\''
 else
-    echo "gawk application was not found -- timestamps will not be available in the logs.  Please delete SetupMinecraft.sh and run the script the new recommended way!"
+    echo "gawk was not found. Timestamps won't be available in the logs."
+    echo "Delete SetupMinecraft.sh and run the script the new recommended way!"
 fi
 screen -L -Logfile logs/servername.$(date +%Y.%m.%d.%H.%M.%S).log -dmS servername /bin/bash -c "${BASH_CMD}"
